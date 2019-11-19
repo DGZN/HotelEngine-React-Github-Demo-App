@@ -2,4 +2,21 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: rgb(0, 116, 179);
 }
+
+/* @font-face {
+  font-family: 'handwriting';
+  src: url('fonts/JOURNAL.TTF') format('ttf'),
+    url('fonts/JOURNAL.TTF') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/*
+@font-face {
+  font-family: 'typewriter';
+  src: url('fonts/veteran_typewriter-webfont.woff2') format('woff2'),
+    url('fonts/veteran_typewriter-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal; */

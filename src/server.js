@@ -27,13 +27,21 @@ server
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />
-        <title>Welcome to Razzle</title>
+        <title>HOTEL ENGINE - REACT APP</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         ${
           assets.client.css
             ? `<link rel="stylesheet" href="${assets.client.css}">`
             : ''
         }
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+        <script>
+        $(document).ready(()=>{
+          $('.tabular.menu .item').tab();
+        })
+        </script>
         ${
           process.env.NODE_ENV === 'production'
             ? `<script src="${assets.client.js}" defer></script>`

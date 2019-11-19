@@ -9,10 +9,18 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
+    "@octokit/plugin-throttling": "^2.7.0",
+    "@octokit/rest": "^16.34.1",
     "express": "^4.17.1",
+    "global": "^4.4.0",
+    "jquery": "^3.4.1",
+    "parcel": "^1.12.4",
     "razzle": "^3.0.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "moment": "^2.24.0"
   }
 }

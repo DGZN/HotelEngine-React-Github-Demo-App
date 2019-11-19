@@ -1,0 +1,157 @@
+.PR {
+  text-align: center;
+}
+
+.PR-logo {
+  animation: Home-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.PR-header {
+  background-color: #20272F;
+  height: 50px;
+  padding: 20px;
+  color: #FFCDD2;
+}
+
+.PR-intro {
+  font-size: large;
+}
+
+.PR-intro code {
+  font-weight: bold;
+  font-size: 2wfpx;
+}
+
+.PR-search {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.PR .search {
+  position: relative;
+  width: 80%;
+  padding: 12px;
+  line-height: 22px;
+  color: #eee;
+  text-align: center;
+  font-size: 16px;
+  border: 0px;
+  border-radius: 25px;
+  box-sizing: border-box;
+  background-color: #20272F;
+}
+
+.circular.github.icon {
+  transition: all 5.5s ease;
+}
+
+.rotate-y {
+  -webkit-transform: rotateY(360deg);
+  transform: translateY(360deg);
+}
+
+.icon.header {
+  color: white;
+  font-weight: 100;
+  font-family: monospace;
+  font-size: 2.3em;
+  margin: 2rem;
+  text-decoration-style: dotted !important;
+  text-decoration-line: inherit;
+  text-decoration-style: dotted;
+}
+
+input,
+textarea {
+  font: .9em/1.5em "handwriting", sans-serif;
+  border: none;
+  padding: 0 10px;
+  margin: 0;
+  width: 240px;
+  background: none;
+}
+
+.PR-resources {
+  list-style: none;
+}
+
+.PR-resources > li {
+  display: inline-block;
+  padding: 1rem;
+}
+
+@keyframes Home-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.basic.fluid.segment {
+    box-shadow: 0 0px 0px 0 rgba(34,36,38,0);
+    border-radius: 0rem;
+    border: 0px solid rgba(34,36,38,.15); 
+}
+
+.item:hover {
+  background-color: wheat;
+}
+
+.item {
+  cursor: pointer;
+  font-family: monospace;
+}
+
+.masked {
+  -webkit-text-security: circle;
+}
+
+.hide-overflow {
+  /* max-height: 250px; */
+  overflow: hidden;
+  margin-bottom: 20px;;
+}
+
+.ui.label,
+.ui.labels .label {
+  top: -2px;
+  right: -2px;
+  font-size: 0.90em !important;
+}
+
+.display-more {
+  position: relative;
+  top: 25px;
+  margin: 0 auto;
+  width: 100%;
+  height: 30px;
+  background: rgba(0,0,0, 0.15);
+  text-align: center;
+  color: rgba(0,0,0,1);
+  cursor: pointer;
+  z-index: 99999;
+}
+
+.display-more:hover {
+  color: rgba(0, 0, 0, 1);
+  background: rgba(0, 0, 0, 1);
+  color: #eee;
+  font-weight: bold;
+}
+
+.horizontal.divider {
+  font-size: 1.1em;
+}
+
+.disabled {
+  text-decoration: line-through;
+  color: gray;
+  cursor: initial;
+}
+
+.hidden {
+  display: none;
+}
