@@ -4,12 +4,23 @@ import PullRequest from './PullRequest';
 import GithubTokenModal from './GithubTokenModal'
 import './PullRequests.css';
 
+const token = () => {
+  const token = localStorage.getItem('GITHUB_AUTHTOKEN');
+  if (token && token.length) {
+    console.log(`FOUND TOKEN: ${token}`)
+    return token;
+  } else {
+    console.log(`NO TOKEN FOUND`)
+    return false;
+  }
+}
+
 const Octokit = require("@octokit/rest").plugin(
   require('@octokit/plugin-throttling')
 );
 const octokit = Octokit({
   auth() {
-    return process.env.GITHUB_AUTHTOKEN;
+    return token();
   },
   userAgent: 'HE ReactApp v0.9',
   baseUrl: 'https://api.github.com',
@@ -75,7 +86,7 @@ class PullRequests extends React.Component {
 
 
   async getPullRequest(owner, repo) {
-    if (!process.env.GITHUB_AUTHTOKEN) {
+    if (!token()) {
       return this.checkForGithubToken()
     }
     octokit.pulls.list({
@@ -123,14 +134,10 @@ class PullRequests extends React.Component {
     }.bind(this));
   }
 
-  saveToken(token) {
-    process.env.GITHUB_AUTHTOKEN = token
-    console.log('TOKEN SET')
-  }
-
   checkForGithubToken() {
-    if ( ! process.env.GITHUB_AUTHTOKEN ) {
-      return <GithubTokenModal setToken={this.saveToken} />
+    if (!token()) {
+      console.log(`TOKEN: ${token()}`)
+      return <GithubTokenModal />
     }
   }
 
@@ -161,7 +168,7 @@ class PullRequests extends React.Component {
                       <div className="fluid field">
                         <div className="ui large left icon input">
                           <input className="search" autoFocus onBlur={this.onChange.bind(this)}  placeholder="username / repository" type="text" onKeyDown={this.handleKeyDown.bind(this)}></input>
-                          <div className = "ui large blue button" > Search < /div>
+                          <div className = "ui large blue button" > Search </div>
                           <i className = "github icon" > </i>
                         </div>
                       </div>

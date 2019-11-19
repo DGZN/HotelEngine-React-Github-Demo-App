@@ -89,7 +89,7 @@ class PullRequest extends React.Component {
                       <div className="ui middle aligned items">
                         {commits.map((c,i) => {
                           return (
-                            <div key={c.id} className="item">
+                            <div key={c.node_id} className="item">
                               <div className="middle aligned content">
                                 <a className="header">{c.commit.author.name}</a>
                                 <div className="description">
@@ -108,7 +108,7 @@ class PullRequest extends React.Component {
                         {comments.map((c,i) => {
                           return (
                             <div key={c.id} className="item">
-                              <div class="ui tiny image">
+                              <div className="ui tiny image">
                                 <img src={c.user.avatar_url}></img>
                               </div>
                               <div className="content">
@@ -137,7 +137,7 @@ class PullRequest extends React.Component {
         
         
         </div>
-        <div class="ui horizontal divider">
+        <div className="ui horizontal divider">
           {this.state.i} / {this.state.total}
         </div>
       </div>
