@@ -1,13 +1,16 @@
 import React from 'react';
 import logo from './react.svg';
 import PullRequest from './PullRequest';
+import GithubTokenModal from './GithubTokenModal'
 import './PullRequests.css';
 
 const Octokit = require("@octokit/rest").plugin(
   require('@octokit/plugin-throttling')
 );
 const octokit = Octokit({
-  auth: 'token ff518dc2453d4343c2b40f0c78ee1d8ae71bc604',
+  auth() {
+    return process.env.GITHUB_AUTHTOKEN;
+  },
   userAgent: 'HE ReactApp v0.9',
   baseUrl: 'https://api.github.com',
   throttle: {
@@ -28,14 +31,15 @@ const octokit = Octokit({
   }
 });
 
+
 class PullRequests extends React.Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
       typed: '',
-      pulls: [],
-      results: ''
+      pulls: []
     };
   }
 
@@ -71,12 +75,14 @@ class PullRequests extends React.Component {
 
 
   async getPullRequest(owner, repo) {
+    if (!process.env.GITHUB_AUTHTOKEN) {
+      return this.checkForGithubToken()
+    }
     octokit.pulls.list({
       owner,
       repo,
       state: 'open'
     }).then(function(res) {
-      console.log(res.data)
       this.setState({
         owner,
         repo, 
@@ -117,10 +123,22 @@ class PullRequests extends React.Component {
     }.bind(this));
   }
 
+  saveToken(token) {
+    process.env.GITHUB_AUTHTOKEN = token
+    console.log('TOKEN SET')
+  }
+
+  checkForGithubToken() {
+    if ( ! process.env.GITHUB_AUTHTOKEN ) {
+      return <GithubTokenModal setToken={this.saveToken} />
+    }
+  }
+
   render() {
     let pulls = this.state.pulls;
     return (
       <div className="main">
+
         <div className="ui container">
           <div className="ui sizer vertical segment">
             <h1 className="ui center aligned icon header">
@@ -130,27 +148,33 @@ class PullRequests extends React.Component {
             <p></p>
           </div>
         </div>
-        <div className="ui container">
-          <div className="ui fluid segment">
-            <div className="fluid grid">
-              <div className="row">
-                <div className="column">
-                  <div className="ui large form">
-                    <div className="fluid field">
-                      <div className="ui large left icon input">
-                        <input className="search" autautofocus="true" onBlur={this.onChange.bind(this)}  placeholder="username / repository" type="text" onKeyDown={this.handleKeyDown.bind(this)}></input>
-                        <div className = "ui large blue button" > Search < /div>
-                        <i className = "github icon" > </i>
+
+          <div className="ui container">
+            
+            <div className="ui fluid segment">
+
+              <div className="fluid grid">  
+                <div className="row">
+
+                  <div className="column">
+                    <div className="ui large form">
+                      <div className="fluid field">
+                        <div className="ui large left icon input">
+                          <input className="search" autoFocus onBlur={this.onChange.bind(this)}  placeholder="username / repository" type="text" onKeyDown={this.handleKeyDown.bind(this)}></input>
+                          <div className = "ui large blue button" > Search < /div>
+                          <i className = "github icon" > </i>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>            
-            </div>
-          </div>
-          </div>
-          
+                  </div>  
 
-            <div className="fluid grid">
+
+
+                </div>
+                
+                </div>
+              </div>
+              <div className="fluid grid">
               <div className="column">
                 <div className="raised text segment">
                   {pulls.map((pull, i) => {
@@ -159,9 +183,8 @@ class PullRequests extends React.Component {
                 </div>
               </div>
             </div>
-          
         </div>
-
+        {this.checkForGithubToken()}
       </div>
     );
   }
