@@ -4,13 +4,13 @@ import PullRequest from './PullRequest';
 import GithubTokenModal from './GithubTokenModal'
 import './PullRequests.css';
 
+const localStorage = require('localStorage')
+
 const token = () => {
   const token = localStorage.getItem('GITHUB_AUTHTOKEN');
   if (token && token.length) {
-    console.log(`FOUND TOKEN: ${token}`)
     return token;
   } else {
-    console.log(`NO TOKEN FOUND`)
     return false;
   }
 }
@@ -136,7 +136,6 @@ class PullRequests extends React.Component {
 
   checkForGithubToken() {
     if (!token()) {
-      console.log(`TOKEN: ${token()}`)
       return <GithubTokenModal />
     }
   }
@@ -145,7 +144,6 @@ class PullRequests extends React.Component {
     let pulls = this.state.pulls;
     return (
       <div className="main">
-
         <div className="ui container">
           <div className="ui sizer vertical segment">
             <h1 className="ui center aligned icon header">
@@ -155,41 +153,33 @@ class PullRequests extends React.Component {
             <p></p>
           </div>
         </div>
-
-          <div className="ui container">
-            
-            <div className="ui fluid segment">
-
-              <div className="fluid grid">  
-                <div className="row">
-
-                  <div className="column">
-                    <div className="ui large form">
-                      <div className="fluid field">
-                        <div className="ui large left icon input">
-                          <input className="search" autoFocus onBlur={this.onChange.bind(this)}  placeholder="username / repository" type="text" onKeyDown={this.handleKeyDown.bind(this)}></input>
-                          <div className = "ui large blue button" > Search </div>
-                          <i className = "github icon" > </i>
-                        </div>
+        <div className="ui container">
+          <div className="ui fluid segment">
+            <div className="fluid grid">
+              <div className="row">
+                <div className="column">
+                  <div className="ui large form">
+                    <div className="fluid field">
+                      <div className="ui large left icon input">
+                        <input className="search" autoFocus onBlur={this.onChange.bind(this)}  placeholder="username / repository" type="text" onKeyDown={this.handleKeyDown.bind(this)}></input>
+                        <div className = "ui large blue button" > Search </div>
+                        <i className = "github icon" > </i>
                       </div>
                     </div>
-                  </div>  
-
-
-
-                </div>
-                
-                </div>
-              </div>
-              <div className="fluid grid">
-              <div className="column">
-                <div className="raised text segment">
-                  {pulls.map((pull, i) => {
-                      return <PullRequest key={pull.id} pull={pull} i={(i+1)} total={pulls.length} />
-                  })}
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div className="fluid grid">
+            <div className="column">
+              <div className="raised text segment">
+                {pulls.map((pull, i) => {
+                  return <PullRequest key={pull.id} pull={pull} i={(i+1)} total={pulls.length} />
+                })}
+              </div>
+            </div>
+          </div>
         </div>
         {this.checkForGithubToken()}
       </div>

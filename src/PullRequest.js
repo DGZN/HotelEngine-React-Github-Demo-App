@@ -8,7 +8,6 @@ class PullRequest extends React.Component {
     this.state = {
       activePanel: 'commits',
       displayLabel: true,
-      displayMore: false,
       pull: { 
         title: '',
         body: '',
@@ -32,8 +31,9 @@ class PullRequest extends React.Component {
   }
 
   togglePanel(panel) {
-    if ( ! this.state.pull[panel].length )
+    if ( ! this.state || ! this.state.pull[panel].length ) {
       return;
+    }
     this.setState({
       activePanel: panel,
       displayLabel: panel == 'comments' ? false : true,
@@ -46,12 +46,6 @@ class PullRequest extends React.Component {
           avatar_url: ''
         }
       }
-    })
-  }
-
-  displayMore() {
-    this.setState({
-      displayMore: true
     })
   }
 
@@ -71,7 +65,7 @@ class PullRequest extends React.Component {
                   </div>
                   <div className="middle aligned content">
                     <div className="header">{pull.title}</div>
-                    <div className={"description " + (this.state.displayMore ? '' : 'hide-overflow')}>
+                    <div className="description">
                       {pull.body}
                       <br></br>
                     </div>
@@ -103,39 +97,37 @@ class PullRequest extends React.Component {
                   </div>
 
                       <div className={this.state.activePanel == 'comments' ? 'column' : 'hidden'}>
-                    <div className="ui text segment">
-                      <div className="ui divided items">
-                        {comments.map((c,i) => {
-                          return (
-                            <div key={c.id} className="item">
-                              <div className="ui tiny image">
-                                <img src={c.user.avatar_url}></img>
-                              </div>
-                              <div className="content">
-                                <a className="header">{c.user.login}</a>
-                                <div className="description hide-overflow">
-                                {c.body}
+                        <div className="ui text segment">
+                          <div className="ui divided items">
+                            {comments.map((c,i) => {
+                              return (
+                                <div key={c.id} className="item">
+                                  <div className="ui tiny image">
+                                    <img src={c.user.avatar_url}></img>
+                                  </div>
+                                  <div className="content">
+                                    <a className="header">{c.user.login}</a>
+                                    <div className="description">
+                                    {c.body}
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                          );
-                        })}
+                              );
+                            })}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
                       
                     </div>
-                      <div className="ui top right attached blue basic label">
-                          <span className="price">{moment(pull.created_at).fromNow()} by {pull.user.login}</span>
-                        </div>
+                    <div className="ui top right attached blue basic label">
+                      <span className="price">{moment(pull.created_at).fromNow()} by {pull.user.login}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        
-        
         </div>
         <div className="ui horizontal divider">
           {this.state.i} / {this.state.total}
