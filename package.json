@@ -14,7 +14,7 @@
     "@octokit/rest": "^16.34.1",
     "express": "^4.17.1",
     "global": "^4.4.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "localStorage": "^1.0.4",
     "parcel": "^1.12.4",
     "razzle": "^3.0.0",
