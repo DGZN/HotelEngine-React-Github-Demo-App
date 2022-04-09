@@ -9,7 +9,7 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "@octokit/plugin-throttling": "^2.7.0",
     "@octokit/rest": "^16.34.1",
     "express": "^4.17.1",
