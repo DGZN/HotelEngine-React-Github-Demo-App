@@ -12,7 +12,7 @@
     "moment": "^2.24.0",
     "@octokit/plugin-throttling": "^2.7.0",
     "@octokit/rest": "^16.34.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "global": "^4.4.0",
     "jquery": "^3.4.1",
     "localStorage": "^1.0.4",
